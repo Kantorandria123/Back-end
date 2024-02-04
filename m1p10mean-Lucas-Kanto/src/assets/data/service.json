@@ -1,0 +1,73 @@
+[
+    {
+      "id": 1,
+      "nom": "Coupe de cheveux",
+      "prix": 30.0,
+      "duree": 45,
+      "commission": 5.0
+    },
+    {
+      "id": 2,
+      "nom": "Manucure",
+      "prix": 20.0,
+      "duree": 30,
+      "commission": 2.0
+    },
+    {
+      "id": 3,
+      "nom": "Pédicure",
+      "prix": 25.0,
+      "duree": 40,
+      "commission": 3.0
+    },
+    {
+      "id": 4,
+      "nom": "Épilation",
+      "prix": 40.0,
+      "duree": 60,
+      "commission": 8.0
+    },
+    {
+      "id": 5,
+      "nom": "Soin du visage",
+      "prix": 50.0,
+      "duree": 75,
+      "commission": 10.0
+    },
+    {
+      "id": 6,
+      "nom": "Massage relaxant",
+      "prix": 60.0,
+      "duree": 90,
+      "commission": 15.0
+    },
+    {
+      "id": 7,
+      "nom": "Coloration des cheveux",
+      "prix": 70.0,
+      "duree": 120,
+      "commission": 20.0
+    },
+    {
+      "id": 8,
+      "nom": "Extension de cils",
+      "prix": 80.0,
+      "duree": 60,
+      "commission": 8.0
+    },
+    {
+      "id": 9,
+      "nom": "Coiffure de mariage",
+      "prix": 120.0,
+      "duree": 180,
+      "commission": 30.0
+    },
+    {
+      "id": 10,
+      "nom": "Maquillage professionnel",
+      "prix": 40.0,
+      "duree": 60,
+      "commission": 5.0
+    }
+  ]
+  
