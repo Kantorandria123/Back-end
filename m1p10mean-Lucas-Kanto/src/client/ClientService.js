@@ -17,37 +17,21 @@ module.exports.createClientDBService = (clientDetails) => {
        clientModelData.mdp = encrypted;
        clientModelData.argent = clientDetails.argent;
        clientModelData.token = clientDetails.token;
-       
-      //  clientModelData.save(function resultHandle(error, result) {
+      
 
-      //      if (error) {
-      //          reject(false);
-      //      } else {
-      //          resolve(true);
-      //      }
-      //  });
-
-
-      const saveClient = () => {
-         return clientModelData.save()
-             .then(result => {
-                 return Promise.resolve(true);
-             })
-             .catch(error => {
-                 return Promise.reject(false);
-             });
-     };
+      clientModelData.save()
+            .then(result => {
+                console.log('Save successful');
+                
+                const insertedId = result._id;
+                console.log('insertedId '+insertedId);
+                resolve({ status: true, id: insertedId });
+            })
+            .catch(error => {
+                console.error('Save failed', error);
+                reject({ status: false, error: error });
+            });
      
-     // Usage
-     saveClient()
-         .then(success => {
-             console.log('Save successful');
-         })
-         .catch(error => {
-             console.error('Save failed');
-         });
-     
-
    });
 
 }
