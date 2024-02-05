@@ -7,15 +7,17 @@ module.exports.createClientDBService = (clientDetails) => {
 
    return new Promise(function myFn(resolve, reject) {
 
-       var clientModelData = new ClientModel();
+       var clientModelData = new clientModel();
 
        clientModelData.nom = clientDetails.nom;
        clientModelData.email = clientDetails.email;
        clientModelData.phone = clientDetails.phone;
-       clientModelData.password = clientDetails.password;
+       clientModelData.mdp = clientDetails.mdp;
        var encrypted = encryptor.encrypt(clientDetails.mdp);
        clientModelData.mdp = encrypted;
        clientModelData.argent = clientDetails.argent;
+       clientModelData.token = clientDetails.token;
+       
       //  clientModelData.save(function resultHandle(error, result) {
 
       //      if (error) {
@@ -119,6 +121,7 @@ module.exports.loginUserDBService = (clientDetails) => {
    });
  }
  
+
 
 function getCurrentDateTime() {
    const currentDateTime = new Date();

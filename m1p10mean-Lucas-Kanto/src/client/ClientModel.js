@@ -2,10 +2,6 @@ const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 const clientSchema = new mongoose.Schema({
-  id: {
-    type: Number,
-    required: true,
-  },
   nom: {
     type: String,
     required: true,
@@ -28,7 +24,6 @@ const clientSchema = new mongoose.Schema({
   },
   token: {
     type: String,
-    required: true,
   },
 });
 
