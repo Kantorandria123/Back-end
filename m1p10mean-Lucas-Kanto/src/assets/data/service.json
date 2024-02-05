@@ -1,6 +1,5 @@
 [
   {
-      "id": 1,
       "nom": "Coupe de cheveux",
       "prix": 30.0,
       "duree": 45,
@@ -8,7 +7,6 @@
       "image": "service1.jpg"
   },
   {
-      "id": 2,
       "nom": "Manucure",
       "prix": 20.0,
       "duree": 30,
@@ -16,7 +14,6 @@
       "image": "service2.jpg"
   },
   {
-      "id": 3,
       "nom": "Pédicure",
       "prix": 25.0,
       "duree": 40,
@@ -24,7 +21,6 @@
       "image": "service3.jpg"
   },
   {
-      "id": 4,
       "nom": "Épilation",
       "prix": 40.0,
       "duree": 60,
@@ -32,7 +28,6 @@
       "image": "service4.jpg"
   },
   {
-      "id": 5,
       "nom": "Soin du visage",
       "prix": 50.0,
       "duree": 75,
@@ -40,7 +35,6 @@
       "image": "service5.jpg"
   },
   {
-      "id": 6,
       "nom": "Massage relaxant",
       "prix": 60.0,
       "duree": 90,
@@ -48,7 +42,6 @@
       "image": "service6.jpg"
   },
   {
-      "id": 7,
       "nom": "Coloration des cheveux",
       "prix": 70.0,
       "duree": 120,
@@ -56,7 +49,6 @@
       "image": "service7.jpg"
   },
   {
-      "id": 8,
       "nom": "Extension de cils",
       "prix": 80.0,
       "duree": 60,
@@ -64,7 +56,6 @@
       "image": "service8.jpg"
   },
   {
-      "id": 9,
       "nom": "Coiffure de mariage",
       "prix": 120.0,
       "duree": 180,
@@ -72,7 +63,6 @@
       "image": "service9.jpg"
   },
   {
-      "id": 10,
       "nom": "Maquillage professionnel",
       "prix": 40.0,
       "duree": 60,

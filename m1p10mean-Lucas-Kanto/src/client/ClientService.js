@@ -56,25 +56,19 @@ module.exports.loginUserDBService = (clientDetails) => {
    return new Promise((resolve, reject) => {
      clientModel.findOne({ email: clientDetails.email })
        .then(result => {
-         console.log("email : " + clientDetails.email);
-         console.log("id : " + result.id);
- 
          if (result !== undefined && result !== null) {
            var decrypted = encryptor.decrypt(result.mdp);
            if (decrypted == clientDetails.mdp) {
              now = getCurrentDateTime();
              newToken = encryptor.encrypt(now + decrypted);
-             console.log("now : " + now);
              clientModel.findOneAndUpdate(
-               { id: result.id },
+               { _id: result._id },
                { $set: { token: newToken } },
                { new: true }
              ).then(resulttoken => {
-               console.log("resulttoken.token = " + resulttoken.token);
                clientModel.findOne(
                   { email: resulttoken.email,token:resulttoken.token })
                   .then(resultfinal=> {
-                     console.log("resultfinal = "+resultfinal);
                      resolve({
                         status: true,
                         message: "client validé avec succès!",

@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 
 const employeSchema = new mongoose.Schema({
-  id: {
-    type: Number,
-    required: true,
-  },
   nom: {
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+    required: true,
+  },
   horaireTravail: {
-    type: Number, // Vous pouvez ajuster le type en fonction de vos besoins
+    type: Number, 
     required: true,
   },
 });

@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
 
 const rendezvousSchema = new mongoose.Schema({
-  id: {
-    type: Number,
-  },
   description: {
     type: String,
     required: true,
@@ -17,15 +14,15 @@ const rendezvousSchema = new mongoose.Schema({
     required: true,
   },
   employee_id: {
-    type: Number,
+    type: String,
     required: true,
   },
   service_id: {
-    type: Number,
+    type: String,
     required: true,
   },
   client_id: {
-    type: Number,
+    type: String,
     required: true,
   },
 });

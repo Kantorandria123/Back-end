@@ -1,27 +1,28 @@
 [
     {
-      "id": 1,
       "nom": "Jean Dupont",
+      "image": "employe1.png",
       "horaireTravail": "9h-17h"
     },
     {
       "id": 2,
       "nom": "Marie Martin",
+      "image": "employe2.png",
       "horaireTravail": "10h-18h"
     },
     {
-      "id": 3,
       "nom": "Pierre Lefevre",
+      "image": "employe3.png",
       "horaireTravail": "8h-16h"
     },
     {
-      "id": 4,
       "nom": "Sophie Lambert",
+      "image": "employe4.png",
       "horaireTravail": "11h-19h"
     },
     {
-      "id": 5,
       "nom": "Antoine Robert",
+      "image": "employe.png",
       "horaireTravail": "7h-15h"
     }
   ]

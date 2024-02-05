@@ -22,7 +22,7 @@ var creerRendevousControlleur = async (req, res) =>
     var result = await rendezvousService.creerRendezVous(req.body);
     console.log(result);
     if (result) {
-        res.send({ "status": true, "message": "Rendezvous created successfully","id":result.id});
+        res.send({ "status": true, "message": "Rendezvous created successfully","id":result._id});
     } else {
         res.send({ "status": false, "message": "Error creating user" });
     }
