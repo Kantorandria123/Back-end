@@ -20,5 +20,6 @@ router.route('/employe/lesEmployes').get(employeControlleur.getlisteEmployeContr
 
 /*rendezvous*/ 
 router.route('/rendezvous/creer').post(rendezvousControlleur.creerRendevousControlleur);
+router.route('/rendezvous/lesrendezvous/:clientId').get(rendezvousControlleur.listeRendezvousByClientControllerFn);
 
 module.exports = router;
