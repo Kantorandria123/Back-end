@@ -26,7 +26,7 @@ router.route('/rendezvous/lesrendezvous/:clientId').get(rendezvousControlleur.li
 
 // offrespécial
 router.route('/offrespecial/creer').post(offrespecialControlleur.creerOffrespecialControlleur);
-router.route('offrespecial/lesoffrespecial').get(offrespecialControlleur.listeOffrespecialControlleur);
+router.route('/offrespecial/lesoffrespecial').get(offrespecialControlleur.listeOffrespecialControlleur);
 
 /*preference_service*/
 router.route('/preference/service/creer').post(preferenceServoceControlleur.createPreferenceControllerFn);
