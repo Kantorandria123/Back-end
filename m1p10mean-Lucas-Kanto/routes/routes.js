@@ -6,6 +6,7 @@ var clientController = require('../src/client/ClientControlleur');
 var serviceControlleur = require('../src/service/ServiceControlleur');
 var employeControlleur = require('../src/employe/EmployeControlleur');
 var rendezvousControlleur = require('../src/rendezvous/RendezvousControlleur');
+var offrespecialControlleur = require('../src/offrespeciale/OffrespecialeControlleur');
 
 /*client*/ 
 router.route('/client/login').post(clientController.loginUserControllerFn);
@@ -21,5 +22,9 @@ router.route('/employe/lesEmployes').get(employeControlleur.getlisteEmployeContr
 /*rendezvous*/ 
 router.route('/rendezvous/creer').post(rendezvousControlleur.creerRendevousControlleur);
 router.route('/rendezvous/lesrendezvous/:clientId').get(rendezvousControlleur.listeRendezvousByClientControllerFn);
+
+// offrespécial
+router.route('/offrespecial/creer').post(offrespecialControlleur.creerOffrespecialControlleur);
+router.route('offrespecial/lesoffrespecial').get(offrespecialControlleur.listeOffrespecialControlleur);
 
 module.exports = router;
