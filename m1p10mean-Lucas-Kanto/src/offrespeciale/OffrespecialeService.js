@@ -2,7 +2,43 @@ const OffrespecialeModel = require('./OffrespecialeModel');
 
 const getListOffrespecial = async () => {
     try{
-        const offrespecialList = await OffrespecialeModel.find({});
+        const offrespecialList = await OffrespecialeModel.aggregate([
+            {
+                $addFields: {
+                  service_id: { $toObjectId: "$service_id" }
+                }
+              },
+              {
+                $lookup: {
+                  from: "services",
+                  localField: "service_id",
+                  foreignField: "_id",
+                  as: "service_info"
+                }
+              },
+              {
+                $unwind: "$service_info"
+              },
+              {
+                $project: {
+                    "service_info.nom": 1,
+                    "service_info.duree": 1,
+                    "service_info.prix": 1,
+                    "service_info.commission": 1,
+                    "service_info.image": 1,
+                    _id: 1,
+                    titre: 1,
+                    description: 1,
+                    datedebut: 1,
+                    datefin: 1
+                }
+              },
+              {
+                $match: {
+                    datedebut: { $gt: currentDate }
+                }
+            }
+        ]);
         return {status: true, message: "Listes des offres spécial récupérée avec succès", offrespecialList};
 
     } catch (error) {
