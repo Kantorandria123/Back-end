@@ -10,7 +10,7 @@ const employeSchema = new mongoose.Schema({
     required: true,
   },
   horaireTravail: {
-    type: Number, 
+    type: String, 
     required: true,
   },
 });
