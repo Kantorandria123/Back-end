@@ -2,6 +2,7 @@ const OffrespecialeModel = require('./OffrespecialeModel');
 
 const getListOffrespecial = async () => {
     try{
+        const currentDate = new Date();
         const offrespecialList = await OffrespecialeModel.aggregate([
             {
                 $addFields: {
