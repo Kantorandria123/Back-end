@@ -51,8 +51,31 @@ const listeRendezvousByClientControllerFn = async (req, res) => {
   }
 };
 
+
+const listeRendezvousNotifierControlleurFn = async (req, res) => {
+  try {
+    const clientId = req.params.clientId;
+    
+    if (!clientId) {
+      return res.status(400).send({ status: false, message: "Paramètre clientId manquant dans la requête." });
+    }
+
+    const result = await rendezvousService.listeRendezvousNotifier(clientId);
+
+    if (result.status) {
+      res.send({ status: true, message: result.message, rendezvousList: result.rendezvousList });
+    } else {
+      res.send({ status: false, message: result.message });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ status: false, message: "Erreur lors de la récupération de la liste des rendez-vous par client" });
+  }
+};
+
 module.exports = {
   listeRendezvousControllerFn,
   creerRendevousControlleur,
-  listeRendezvousByClientControllerFn
+  listeRendezvousByClientControllerFn,
+  listeRendezvousNotifierControlleurFn
 };

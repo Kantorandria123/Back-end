@@ -98,7 +98,81 @@ const listeRendezvousByClient = async (clientId) => {
   }
 };
 
+const listeRendezvousNotifier = async (clientId) => {
+  try {
+    console.log("clientId : "+clientId);
+    const currentDate = new Date();
+
+    // Obtenez les composants de la date
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Ajoute un zéro devant si nécessaire
+    const day = String(currentDate.getDate()+1).padStart(2, '0'); // Ajoute un zéro devant si nécessaire
+
+    // Créez la chaîne de date au format "yyyy-mm-dd"
+    const datyNotification = `${year}-${month}-${day}`;
+
+    console.log("datyNotification  = "+datyNotification); 
+    const rendezvousList = await RendezvousModel.aggregate([
+      {
+        $match: {
+          client_id: clientId,
+          daty : datyNotification
+        }
+      },
+      {
+        $addFields: {
+          employee_id: { $toObjectId: "$employee_id" },
+          service_id: { $toObjectId: "$service_id" }
+        }
+      },
+      {
+        $lookup: {
+          from: "employes",
+          localField: "employee_id",
+          foreignField: "_id",
+          as: "employe_info"
+        }
+      },
+      {
+        $unwind: "$employe_info"
+      },
+      {
+        $lookup: {
+          from: "services",
+          localField: "service_id",
+          foreignField: "_id",
+          as: "service_info"
+        }
+      },
+      {
+        $unwind: "$service_info"
+      },
+      {
+        $project: {
+          "employe_info.nom": 1,
+          "employe_info.horaireTravail": 1,
+          "employe_info.image": 1,
+          "service_info.nom": 1,
+          "service_info.duree": 1,
+          "service_info.prix": 1,
+          "service_info.commission": 1,
+          "service_info.image": 1,
+          _id: 1,
+          daty: 1,
+          horaire: 1,
+          description: 1,
+          client_id: 1
+        }
+      }
+    ]);
+    console.log("rendezvousList.length : "+rendezvousList.length);
+    return { status: true, message: "Liste des rendez-vous récupérée avec succès", rendezvousList };
+  } catch (error) {
+    console.error(error);
+    return { status: false, message: "Erreur lors de la récupération de la liste des rendez-vous par client" };
+  }
+};
 
 module.exports = {
-  getListRendezvous,creerRendezVous,listeRendezvousByClient
+  getListRendezvous,creerRendezVous,listeRendezvousByClient,listeRendezvousNotifier
 };

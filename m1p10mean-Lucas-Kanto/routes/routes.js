@@ -23,6 +23,7 @@ router.route('/employe/lesEmployes').get(employeControlleur.getlisteEmployeContr
 /*rendezvous*/ 
 router.route('/rendezvous/creer').post(rendezvousControlleur.creerRendevousControlleur);
 router.route('/rendezvous/lesrendezvous/:clientId').get(rendezvousControlleur.listeRendezvousByClientControllerFn);
+router.route('/rendezvous/notification/:clientId').get(rendezvousControlleur.listeRendezvousNotifierControlleurFn);
 
 // offrespécial
 router.route('/offrespecial/creer').post(offrespecialControlleur.creerOffrespecialControlleur);
