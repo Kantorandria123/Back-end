@@ -61,31 +61,52 @@ db.rendezvous.aggregate([
 ]);
 
 db.offrespeciales.aggregate([
-  {
-    $lookup: {
-      from: "services",
-      localField: "service_id",
-      foreignField: "_id",
-      as: "service_info"
-    }
-  },
-  {
-    $unwind: "$service_info"
-  },
-  {
-    $project: {
-        "service_info.nom": 1,
-        "service_info.duree": 1,
-        "service_info.prix": 1,
-        "service_info.commission": 1,
-        "service_info.image": 1,
-        _id: 1,
-        titre: 1,
-        description: 1,
-        datedebut: 1,
-        datefin: 1
-    }
-  }
+{
+            $match: {
+              $and: [
+                {
+                  datedebut: {
+                    $lt: new Date(daty)
+                  }
+                },
+                {
+                  datefin: {
+                    $gt: new Date(daty)
+                  }
+                }
+              ]
+            }
+          },
+            {
+                $addFields: {
+                  service_id: { $toObjectId: "$service_id" }
+                }
+              },
+              {
+                $lookup: {
+                  from: "services",
+                  localField: "service_id",
+                  foreignField: "_id",
+                  as: "service_info"
+                }
+              },
+              {
+                $unwind: "$service_info"
+              },
+              {
+                $project: {
+                    "service_info.nom": 1,
+                    "service_info.duree": 1,
+                    "service_info.prix": 1,
+                    "service_info.commission": 1,
+                    "service_info.image": 1,
+                    _id: 1,
+                    titre: 1,
+                    description: 1,
+                    datedebut: 1,
+                    datefin: 1
+                }
+              }
 ]);
 
 ng add @angular/material

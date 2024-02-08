@@ -2,8 +2,34 @@ const OffrespecialeModel = require('./OffrespecialeModel');
 
 const getListOffrespecial = async () => {
     try{
-        const currentDate = new Date();
+      const currentDate = new Date();
+
+      // Obtenez les composants de la date
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Ajoute un zéro devant si nécessaire
+      const day = String(currentDate.getDate()+1).padStart(2, '0'); // Ajoute un zéro devant si nécessaire
+  
+      // Créez la chaîne de date au format "yyyy-mm-dd"
+      const daty = `${year}-${month}-${day}`;
+  
+      console.log("daty  = "+daty); 
         const offrespecialList = await OffrespecialeModel.aggregate([
+          {
+            $match: {
+              $and: [
+                {
+                  datedebut: {
+                    $lt: new Date(daty)
+                  }
+                },
+                {
+                  datefin: {
+                    $gt: new Date(daty)
+                  }
+                }
+              ]
+            }
+          },
             {
                 $addFields: {
                   service_id: { $toObjectId: "$service_id" }
@@ -33,12 +59,7 @@ const getListOffrespecial = async () => {
                     datedebut: 1,
                     datefin: 1
                 }
-              },
-              {
-                $match: {
-                    datedebut: { $gt: currentDate }
-                }
-            }
+              }
         ]);
         return {status: true, message: "Listes des offres spécial récupérée avec succès", offrespecialList};
 
