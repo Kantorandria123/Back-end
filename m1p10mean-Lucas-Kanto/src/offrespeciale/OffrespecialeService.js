@@ -7,61 +7,60 @@ const getListOffrespecial = async () => {
       // Obtenez les composants de la date
       const year = currentDate.getFullYear();
       const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Ajoute un zéro devant si nécessaire
-      const day = String(currentDate.getDate()+1).padStart(2, '0'); // Ajoute un zéro devant si nécessaire
+      const day = String(currentDate.getDate()).padStart(2, '0'); // Ajoute un zéro devant si nécessaire
   
       // Créez la chaîne de date au format "yyyy-mm-dd"
       const daty = `${year}-${month}-${day}`;
-  
-      console.log("daty  = "+daty); 
-        const offrespecialList = await OffrespecialeModel.aggregate([
-          {
-            $match: {
-              $and: [
-                {
-                  datedebut: {
-                    $lt: new Date(daty)
-                  }
-                },
-                {
-                  datefin: {
-                    $gt: new Date(daty)
-                  }
-                }
-              ]
-            }
-          },
-            {
-                $addFields: {
-                  service_id: { $toObjectId: "$service_id" }
-                }
-              },
+
+      const offrespecialList = await OffrespecialeModel.aggregate([
+        {
+          $addFields: {
+            service_id: { $toObjectId: "$service_id" }
+          }
+        },
+        {
+          $lookup: {
+            from: "services",
+            localField: "service_id",
+            foreignField: "_id",
+            as: "service_info"
+          }
+        },
+        {
+          $match: {
+            $and: [
               {
-                $lookup: {
-                  from: "services",
-                  localField: "service_id",
-                  foreignField: "_id",
-                  as: "service_info"
+                datedebut: {
+                  $lt: new Date(daty)
                 }
               },
               {
-                $unwind: "$service_info"
-              },
-              {
-                $project: {
-                    "service_info.nom": 1,
-                    "service_info.duree": 1,
-                    "service_info.prix": 1,
-                    "service_info.commission": 1,
-                    "service_info.image": 1,
-                    _id: 1,
-                    titre: 1,
-                    description: 1,
-                    datedebut: 1,
-                    datefin: 1
+                datefin: {
+                  $gt: new Date(daty)
                 }
               }
-        ]);
-        return {status: true, message: "Listes des offres spécial récupérée avec succès", offrespecialList};
+            ]
+          }
+        },
+        {
+          $unwind: "$service_info"
+        },
+        {
+          $project: {
+            "service_info.nom": 1,
+            "service_info.duree": 1,
+            "service_info.prix": 1,
+            "service_info.commission": 1,
+            "service_info.image": 1,
+            _id: 1,
+            titre: 1,
+            description: 1,
+            datedebut: 1,
+            datefin: 1
+          }
+        }
+      ]);
+      return {status: true, message: "Listes des offres spécial récupérée avec succès", offrespecialList};
 
     } catch (error) {
         console.error(error);
