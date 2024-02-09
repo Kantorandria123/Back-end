@@ -14,4 +14,53 @@ const getlisteEmployeControlleur = async (req, res) => {
   }
 };
 
-module.exports = { getlisteEmployeControlleur };
+var createEmployeeControllerFn = async (req, res) => 
+{
+    try
+    {
+    console.log(req.body);
+    var status = await employeService.createEmployeeDBService(req.body);
+    console.log(status);
+
+    if (status) {
+        res.send({ "status": true, "message": "Employee created successfully" });
+    } else {
+        res.send({ "status": false, "message": "Error creating Employeeuser" });
+    }
+}
+catch(err)
+{
+    console.log(err);
+}
+}
+
+var loginEmployeeControllerFn = async (req, res) => {
+  try {
+      const result = await employeService.loginEmployeerDBService(req.body);
+      if (result.status) {
+          res.send({ "status": true, "message": result.message, "employee": result.client });
+      } else {
+          res.send({ "status": false, "message": result.message });
+      }
+  } catch (error) {
+      console.error(error);
+      res.send({ "status": false, "message": error.message });
+  }
+}
+
+var getEmployeeByTokenControlleur = async (req, res) => {
+  try {
+      const result = await employeService.getEmployeeByToken(req.body);
+      if (result.status) {
+          res.send({ "status": true, "message": result.message, "employee": result.client });
+      } else {
+          res.send({ "status": false, "message": result.message });
+      }
+  } catch (error) {
+      console.error(error);
+      res.send({ "status": false, "message": error.message });
+  }
+}
+
+
+module.exports = { getlisteEmployeControlleur,loginEmployeeControllerFn,getEmployeeByTokenControlleur,createEmployeeControllerFn };

@@ -5,6 +5,14 @@ const employeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+  },
+  mdp: {
+    type: String,
+    required: true,
+  },
   image: {
     type: String,
     required: true,
@@ -12,6 +20,13 @@ const employeSchema = new mongoose.Schema({
   horaireTravail: {
     type: String, 
     required: true,
+  },
+  role_id: {
+    type: String,
+    required: true,
+  },
+  token: {
+    type: String,
   },
 });
 
