@@ -10,16 +10,23 @@ var offrespecialControlleur = require('../src/offrespeciale/OffrespecialeControl
 var preferenceServoceControlleur = require('../src/preference_service/PreferenceControlleur');
 var preferenceEmployeControlleur = require('../src/preference_employe/PreferenceControlleur');
 var paiementControlleur = require('../src/paiement/PaiementControlleur');
+var roleControlleur = require("../src/role/RoleControlleur");
 /*client*/ 
 router.route('/client/login').post(clientController.loginUserControllerFn);
 router.route('/client/create').post(clientController.createClientControllerFn);
 router.route('/client/getbytoken').post(clientController.getClientByTokenControlleur);
+
+/*role*/ 
+router.route('/role/lesroles').get(roleControlleur.getlisteRoleControlleur);
 
 /*service*/ 
 router.route('/service/lesservices').get(serviceControlleur.getListServiceControlleur);
 
 /*employe*/ 
 router.route('/employe/lesEmployes').get(employeControlleur.getlisteEmployeControlleur);
+router.route('/employe/create').post(employeControlleur.createEmployeeControllerFn);
+router.route('/employe/getbytoken').post(employeControlleur.getEmployeeByTokenControlleur);
+router.route('/employe/login').post(employeControlleur.loginEmployeeControllerFn);
 
 /*rendezvous*/ 
 router.route('/rendezvous/creer').post(rendezvousControlleur.creerRendevousControlleur);
