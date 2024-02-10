@@ -12,7 +12,7 @@ app.use(cors({
 const PORT = 3000;
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/salon_beaute");
+mongoose.connect('mongodb+srv://salon_beaute_user:cEjuTZtOPCF3qVHi@cluster0.dne684n.mongodb.net/m1p10mean-lucas-kanto?retryWrites=true&w=majority');
 
 // Handling MongoDB connection events
 const db = mongoose.connection;
