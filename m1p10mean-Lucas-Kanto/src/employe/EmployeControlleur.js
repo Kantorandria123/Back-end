@@ -36,9 +36,9 @@ catch(err)
 
 var loginEmployeeControllerFn = async (req, res) => {
   try {
-      const result = await employeService.loginEmployeerDBService(req.body);
+      const result = await employeService.loginEmployeeDBService(req.body);
       if (result.status) {
-          res.send({ "status": true, "message": result.message, "employee": result.client });
+          res.send({ "status": true, "message": result.message, "employee": result.employee });
       } else {
           res.send({ "status": false, "message": result.message });
       }
@@ -52,7 +52,7 @@ var getEmployeeByTokenControlleur = async (req, res) => {
   try {
       const result = await employeService.getEmployeeByToken(req.body);
       if (result.status) {
-          res.send({ "status": true, "message": result.message, "employee": result.client });
+          res.send({ "status": true, "message": result.message, "employee": result.employee });
       } else {
           res.send({ "status": false, "message": result.message });
       }

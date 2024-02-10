@@ -1,4 +1,6 @@
 const employeModel = require('./EmployeModel');
+var key = '123456789trytryrtyr';
+var encryptor = require('simple-encryptor')(key);
 
 const getListEmploye = async () => {
   try {
@@ -10,22 +12,22 @@ const getListEmploye = async () => {
   }
 };
 
-module.exports.createEmployeeDBService = (employeetDetails) => {
+const createEmployeeDBService = (employeeDetails) => {
 
 
   return new Promise(function myFn(resolve, reject) {
 
       var employeeModelData = new employeModel();
 
-      employeeModelData.nom = employeetDetails.nom;
-      employeeModelData.email = employeetDetails.email;
-      employeeModelData.mdp = employeetDetails.mdp;
-      var encrypted = encryptor.encrypt(employeetDetails.mdp);
+      employeeModelData.nom = employeeDetails.nom;
+      employeeModelData.email = employeeDetails.email;
+      employeeModelData.mdp = employeeDetails.mdp;
+      var encrypted = encryptor.encrypt(employeeDetails.mdp);
       employeeModelData.mdp = encrypted;
-      employeeModelData.image = employeetDetails.image;
-      employeeModelData.horaireTravail = employeetDetails.horaireTravail;
-      employeeModelData.role_id = employeetDetails.role_id;
-      employeeModelData.token = employeetDetails.token;
+      employeeModelData.image = employeeDetails.image;
+      employeeModelData.horaireTravail = employeeDetails.horaireTravail;
+      employeeModelData.role_id = employeeDetails.role_id;
+      employeeModelData.token = employeeDetails.token;
      
 
       employeeModelData.save()
@@ -47,13 +49,13 @@ module.exports.createEmployeeDBService = (employeetDetails) => {
 
 
 
-module.exports.loginEmployeerDBService = (employeetDetails) => {
+const loginEmployeeDBService = (employeeDetails) => {
   return new Promise((resolve, reject) => {
-    employeModel.findOne({ email: employeetDetails.email })
+    employeModel.findOne({ email: employeeDetails.email })
       .then(result => {
         if (result !== undefined && result !== null) {
           var decrypted = encryptor.decrypt(result.mdp);
-          if (decrypted == employeetDetails.mdp) {
+          if (decrypted == employeeDetails.mdp) {
             now = getCurrentDateTime();
             newToken = encryptor.encrypt(now + decrypted);
             employeModel.findOneAndUpdate(
@@ -90,12 +92,12 @@ module.exports.loginEmployeerDBService = (employeetDetails) => {
   });
 }
 
-module.exports.getEmployeeByToken = (employeetDetails) => {
+const getEmployeeByToken = (employeeDetails) => {
   return new Promise((resolve, reject) => {
-    employeModel.findOne({ email: employeetDetails.email,token:employeetDetails.token,role_id: resulttoken.role_id})
+    employeModel.findOne({ email: employeeDetails.email,token:employeeDetails.token,role_id: employeeDetails.role_id})
       .then(result => {
-        console.log("email : " + employeetDetails.email);
-        console.log("token : " + employeetDetails.token);
+        console.log("email : " + employeeDetails.email);
+        console.log("token : " + employeeDetails.token);
         console.log("result "+result);
         resolve({
            status: true,
@@ -120,5 +122,8 @@ function getCurrentDateTime() {
 }
 
 module.exports = {
-  getListEmploye
+  getListEmploye,
+  createEmployeeDBService,
+  loginEmployeeDBService,
+  getEmployeeByToken
 };
